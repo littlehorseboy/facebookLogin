@@ -15,6 +15,8 @@
   >
   </fb:login-button>
 
+  <button id="getNameBtn">取得名稱</button>
+
   <script>
     window.fbAsyncInit = function () {
       FB.init({
@@ -43,6 +45,13 @@
         statusChangeCallback(response);
       });
     }
+
+    const getNameBtn = document.querySelector('#getNameBtn');
+    getNameBtn.addEventListener('click', (event) => {
+      FB.api('/me', function(response2) {
+        name = response2.name;
+      });
+    });
   </script>
 </body>
 
