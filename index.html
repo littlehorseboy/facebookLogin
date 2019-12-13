@@ -9,15 +9,15 @@
 </head>
 
 <body>
-  <fb:login-button 
-    scope="public_profile,email"
-    onlogin="checkLoginState();"
-  >
+  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
   </fb:login-button>
+
+  <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with"
+    data-auto-logout-link="false" data-use-continue-as="false" data-onlogin="checkLoginState"></div>
 
   <button id="getNameBtn">取得名稱</button>
 
-  <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false" data-onlogin="checkLoginState"></div>
+  <button id="fbLogoutBtn">FB 登出</button>
 
   <script>
     window.fbAsyncInit = function () {
@@ -43,15 +43,22 @@
     }(document, 'script', 'facebook-jssdk'));
 
     function checkLoginState() {
-      FB.getLoginStatus(function(response) {
+      FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
       });
     }
 
     const getNameBtn = document.querySelector('#getNameBtn');
     getNameBtn.addEventListener('click', (event) => {
-      FB.api('/me', function(response2) {
-        name = response2.name;
+      FB.api('/me', function (response) {
+        debugger;
+      });
+    });
+
+    const fbLogoutBtn = document.querySelector('#fbLogoutBtn');
+    fbLogoutBtn.addEventListener('click', (event) => {
+      FB.logout(function (response) {
+        debugger;
       });
     });
   </script>
